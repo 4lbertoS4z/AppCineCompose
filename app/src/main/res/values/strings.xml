@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Movie and Series wiki</string>
+    <string name="error_no_internet">No internet</string>
+    <string name="error_too_many_requests">too many request</string>
+    <string name="error_request_timeout">request timeout</string>
+    <string name="error_server">server error</string>
+    <string name="error_serialization">serialization error</string>
+    <string name="error_unknown">unknown error</string>
+</resources>
