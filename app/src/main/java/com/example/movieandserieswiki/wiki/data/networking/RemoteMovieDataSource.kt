@@ -14,10 +14,21 @@ import io.ktor.client.request.get
 
 class RemoteMovieDataSource(private val httpClient: HttpClient) : MovieDataSource {
     private val apiKey = "35e837b53acf4edd31521171a039d823"  // Obtén la API Key desde BuildConfig
-    override suspend fun getMovies(): Result<List<Movie>, NetworkError> {
+    override suspend fun getPopularMovies(): Result<List<Movie>, NetworkError> {
         val url = "${ BuildConfig.BASE_URL}movie/popular?api_key=$apiKey&language=es-ES"
         return safeCall<MoviesResponseDto> { httpClient.get(url) }
             .map { response -> response.results.map { it.toMovie() } }
+    }
 
+    override suspend fun getUpcomingMovies(): Result<List<Movie>, NetworkError> {
+        val url = "${ BuildConfig.BASE_URL}movie/upcoming?api_key=$apiKey&language=es-ES"
+        return safeCall<MoviesResponseDto> { httpClient.get(url) }
+            .map { response -> response.results.map { it.toMovie() } }
+    }
+
+    override suspend fun nowPlayingMovies(): Result<List<Movie>, NetworkError> {
+        val url = "${ BuildConfig.BASE_URL}movie/now_playing?api_key=$apiKey&language=es-ES"
+        return safeCall<MoviesResponseDto> { httpClient.get(url) }
+            .map { response -> response.results.map { it.toMovie() } }
     }
 }
