@@ -13,11 +13,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.movieandserieswiki.core.presentation.util.ObserveAsEvents
 import com.example.movieandserieswiki.core.presentation.util.toString
-import com.example.movieandserieswiki.wiki.presentation.MovieListAction
-import com.example.movieandserieswiki.wiki.presentation.MovieListEvent
-import com.example.movieandserieswiki.wiki.presentation.MovieListScreen
-import com.example.movieandserieswiki.wiki.presentation.MovieListViewModel
+import com.example.movieandserieswiki.wiki.presentation.movie_detail.MovieDetailScreen
+import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListAction
+import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListEvent
+import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListScreen
+import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListViewModel
 import org.koin.androidx.compose.koinViewModel
+
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -46,12 +48,29 @@ fun AdaptativeMovieListDetailPane(
             AnimatedPane {
                 MovieListScreen(
                     state = state,
-                   // onAction = { /* Aquí no se necesita ninguna acción */ },
-                    modifier = modifier
+                    onAction = { action ->
+                        viewModel.onAction(action)
+                        when (action) {
+                            is MovieListAction.OnMovieSelected -> {
+                                navigator.navigateTo(
+                                    pane = ListDetailPaneScaffoldRole.Detail
+                                )
+
+                            }
+                        }
+                    }
                 )
             }
         },
-        detailPane = { /* Aquí no se necesita la vista de detalle aún */ },
+        detailPane = {
+            AnimatedPane {
+                MovieDetailScreen(
+                    state = state
+                )
+            }
+        },
         modifier = modifier
-    )
-}
+
+
+            )
+        }

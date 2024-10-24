@@ -45,15 +45,15 @@ data class CreditsDto(
 
 @Serializable
 data class CastDto(
-    val castId: Int,
+    val castId: Int? = null,
     val character: String,
     val name: String,
-    val profilePath: String?
+    val profilePath: String? = null
 )
 
 @Serializable
 data class CrewDto(
     val job: String,
     val name: String,
-    val profilePath: String?
+    val profilePath: String? = null
 )

@@ -39,14 +39,14 @@ data class CreditsResponse(  // Cambio a CreditsResponse para que coincida
 )
 
 data class Cast(
-    val castId: Int,
+    val castId: Int? = null,  // Opcional
     val character: String,
     val name: String,
-    val profilePath: String?
+    val profilePath: String? = null
 )
 
 data class Crew(
     val job: String,
     val name: String,
-    val profilePath: String?
+    val profilePath: String? = null
 )

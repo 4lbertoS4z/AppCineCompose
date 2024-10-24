@@ -8,7 +8,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import org.koin.dsl.bind
 import com.example.movieandserieswiki.wiki.data.networking.RemoteMovieDataSource
-import com.example.movieandserieswiki.wiki.presentation.MovieListViewModel
+import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListViewModel
 
 val appModule = module {
     single{ HttpClientFactory.create(CIO.create())}

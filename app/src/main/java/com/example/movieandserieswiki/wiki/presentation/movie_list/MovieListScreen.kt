@@ -1,4 +1,4 @@
-package com.example.movieandserieswiki.wiki.presentation
+package com.example.movieandserieswiki.wiki.presentation.movie_list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,18 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
-import com.example.movieandserieswiki.wiki.presentation.components.MovieListItem
+import com.example.movieandserieswiki.wiki.presentation.movie_list.components.MovieListItem
 
 @Composable
 fun MovieListScreen(
     state: MovieListState,
+    onAction: (MovieListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (state.isLoading) {
@@ -47,7 +47,12 @@ fun MovieListScreen(
                     items(state.nowPlayingMovies) { movieUi ->
                         MovieListItem(
                             movieUi = movieUi,
-                            modifier = Modifier.fillMaxWidth(1f).fillMaxHeight()
+                            modifier = Modifier
+                                .fillMaxWidth(1f)
+                                .fillMaxHeight(),
+                            onClick = {
+                                onAction(MovieListAction.OnMovieSelected(movieUi))
+                            }
                         )
                     }
                 }
@@ -68,7 +73,10 @@ fun MovieListScreen(
                     items(state.upcomingMovies) { movieUi ->
                         MovieListItem(
                             movieUi = movieUi,
-                            modifier = Modifier.fillMaxWidth(0.60f)
+                            modifier = Modifier.fillMaxWidth(0.60f),
+                            onClick = {
+                                onAction(MovieListAction.OnMovieSelected(movieUi))
+                            }
                         )
                     }
                 }
@@ -89,7 +97,10 @@ fun MovieListScreen(
                     items(state.popularMovies) { movieUi ->
                         MovieListItem(
                             movieUi = movieUi,
-                            modifier = Modifier.fillMaxWidth(0.60f)
+                            modifier = Modifier.fillMaxWidth(0.60f),
+                            onClick = {
+                                onAction(MovieListAction.OnMovieSelected(movieUi))
+                            }
                         )
                     }
                 }

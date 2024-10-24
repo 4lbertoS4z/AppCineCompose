@@ -1,15 +1,13 @@
-package com.example.movieandserieswiki.wiki.presentation
+package com.example.movieandserieswiki.wiki.presentation.movie_list
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieandserieswiki.core.domain.util.onError
 import com.example.movieandserieswiki.core.domain.util.onSuccess
 import com.example.movieandserieswiki.wiki.domain.Movie
 import com.example.movieandserieswiki.wiki.domain.MovieDataSource
+import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
 import com.example.movieandserieswiki.wiki.presentation.models.toMovieUi
-import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,21 +23,20 @@ class MovieListViewModel(
     private val movieDataSource: MovieDataSource
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieListState())
-    @RequiresApi(Build.VERSION_CODES.O)
+
     val state = _state.onStart { loadAllMovies() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), MovieListState())
     private val _events = Channel<MovieListEvent>()
     val events = _events.receiveAsFlow()
 
-    /* fun onAction(action:MovieListAction){
+     fun onAction(action: MovieListAction){
          when(action){
              is MovieListAction.OnMovieSelected -> {
                  selectedMovie(action.movieUi)
              }
          }
-     } */
+     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadAllMovies() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
@@ -82,10 +79,29 @@ class MovieListViewModel(
             }
         }
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+
+    private fun selectedMovie(movieUi: MovieUi) {
+        _state.update { it.copy(movieDetail = movieUi) }
+
+        viewModelScope.launch {
+            movieDataSource.getDetailMovie(movieId = movieUi.id).onSuccess { movieDetail ->
+                // Asegúrate de que movieDetail sea de tipo Movie
+                _state.update { currentState ->
+                    currentState.copy(
+                        movieDetail = movieDetail.toMovieUi(),  // Asegúrate de que esto funcione correctamente
+                        isLoading = false
+                    )
+                }
+            }.onError { error ->
+                _events.send(MovieListEvent.Error(error))
+            }
+        }
+    }
+
     private fun filterUpcomingMovies(upcomingMovies: List<Movie>): List<Movie> {
         val currentDate = LocalDate.now()
-        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") // Ajusta el patrón según el formato de tu fecha
+        val dateFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd") // Ajusta el patrón según el formato de tu fecha
 
         return upcomingMovies.filter { movie ->
             // Convierte la fecha de lanzamiento a LocalDate
@@ -93,54 +109,6 @@ class MovieListViewModel(
             releaseDate.isAfter(currentDate) // Compara si la fecha de lanzamiento es después de la fecha actual
         }
     }
+
+
 }
-/*
-    private fun loadUpcomingMovies() {
-        viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
-
-            movieDataSource.getUpcomingMovies().onSuccess { upcomingMovies ->
-                _state.update {
-                    it.copy(isLoading = false,
-                        popularMovies = upcomingMovies.map { it.toMovieUi() }
-                    )
-                }
-            }
-                .onError { error->
-                    _state.update { it.copy(isLoading = false) }
-                    _events.send(MovieListEvent.Error(error))
-                }
-            movieDataSource.nowPlayingMovies().onSuccess { nowPlayingMovies ->
-                _state.update {
-                    it.copy(isLoading = false,
-                        popularMovies = nowPlayingMovies.map { it.toMovieUi() }
-                    )
-                }
-            }
-                .onError { error->
-                    _state.update { it.copy(isLoading = false) }
-                    _events.send(MovieListEvent.Error(error))
-                }
-        }
-    }
-
-    private fun nowPlayingMovies() {
-        viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
-
-            movieDataSource.nowPlayingMovies().onSuccess { nowPlayingMovies ->
-                _state.update {
-                    it.copy(isLoading = false,
-                        popularMovies = nowPlayingMovies.map { it.toMovieUi() }
-                    )
-                }
-            }
-                .onError { error->
-                    _state.update { it.copy(isLoading = false) }
-                    _events.send(MovieListEvent.Error(error))
-                }
-        }
-    }
-}
-
-*/
