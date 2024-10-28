@@ -64,8 +64,10 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.androidx.constraintlayout)
     debugImplementation(libs.bundles.compose.debug)
-
+    implementation(libs.pagingCompose)
+    implementation (libs.androidx.paging.compose.v100alpha17)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     implementation(libs.bundles.koin)

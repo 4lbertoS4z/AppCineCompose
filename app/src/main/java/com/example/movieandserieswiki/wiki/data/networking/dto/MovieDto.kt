@@ -14,7 +14,7 @@ data class MovieDto(
     @SerialName("release_date") val releaseDate: String? = null,  // Cambiado a opcional
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("backdrop_path") val backdropPath: String? = null,
-    val popularity: Double,
+    val popularity: Double?=null,
     val genres: List<GenreDto>? = null,
     val runtime: Int? = null,
     val videos: VideosDto? = null,

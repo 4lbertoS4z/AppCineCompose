@@ -47,6 +47,7 @@ fun AdaptativeMovieListDetailPane(
         listPane = {
             AnimatedPane {
                 MovieListScreen(
+                    viewModel = viewModel,
                     state = state,
                     onAction = { action ->
                         viewModel.onAction(action)
