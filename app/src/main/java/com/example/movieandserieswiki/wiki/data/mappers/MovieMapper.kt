@@ -1,6 +1,7 @@
 package com.example.movieandserieswiki.wiki.data.mappers
 
 
+import android.util.Log
 import com.example.movieandserieswiki.wiki.data.networking.dto.CastDto
 import com.example.movieandserieswiki.wiki.data.networking.dto.CreditsDto
 import com.example.movieandserieswiki.wiki.data.networking.dto.CrewDto
@@ -54,11 +55,13 @@ fun CreditsDto.toCreditsResponse(): CreditsResponse {
 }
 
 fun CastDto.toCast(): Cast {
+    Log.d("CastDto", "ProfilePath: $profilePath")
     return Cast(
         castId = this.castId,
         character = this.character,
         name = this.name,
-        profilePath = this.profilePath
+        profilePath = this.profilePath,
+        popularity = this.popularity
     )
 }
 

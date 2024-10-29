@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,9 +17,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
 import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
@@ -34,12 +31,13 @@ fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Mo
     }
 
     Box(
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier
+            .clickable(onClick = onClick)
             .padding(34.dp)
             .clip(RoundedCornerShape(10))
             .fillMaxWidth()
             .height(220.dp),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.BottomStart
     ) {
         // Utiliza AsyncImage para cargar la imagen
         AsyncImage(
@@ -50,10 +48,11 @@ fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Mo
             placeholder = painterResource(id = R.drawable.sample), // Reemplaza con tu recurso de imagen
             error = painterResource(id = R.drawable.ic_launcher_background) // Reemplaza con tu recurso de imagen
         )
+        // Box con el fondo degradado
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(40.dp)
+                .height(80.dp)
                 .background(
                     Brush.verticalGradient(
                         listOf(
@@ -63,12 +62,22 @@ fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Mo
                         )
                     )
                 ),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.BottomStart
         ) {
-            Text(text = movieUi.voteAverage.formatted, color = contentColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            CircularRatingIndicator(
+                rating = movieUi.voteAverage.formatted.toFloat(),
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(8.dp)
+                    .size(60.dp)
+            )
         }
+
+
     }
 }
+
+
 
 
 

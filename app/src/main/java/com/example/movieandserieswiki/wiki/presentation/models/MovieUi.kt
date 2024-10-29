@@ -15,6 +15,7 @@ data class MovieUi(
     val posterPath: String?,
     val backdropPath: String?,
     val popularity: DisplayableNumber,
+    val cast: List<CastUi> = emptyList(),
     val genres: List<GenreUi> = emptyList(),  // Puedes agregar un modelo GenreUi si lo deseas
     val videos: List<VideoUi> = emptyList(),  // Igualmente, si deseas mostrar información de videos
 )
@@ -24,10 +25,18 @@ data class GenreUi(
     val name: String
 )
 
+data class CastUi(
+    val name: String,
+    val character: String,
+    val profilePath: String? = null,
+    val popularity: Double? = null
+)
+
 data class VideoUi(
     val key: String,
     val name: String
 )
+
 data class DisplayableNumber(
     val value: Double,
     val formatted: String
@@ -45,8 +54,12 @@ fun Movie.toMovieUi(): MovieUi {
         posterPath = posterPath,
         backdropPath = backdropPath,
         popularity = popularity.toDisplayableNumber(),
-        genres = genres?.map { GenreUi(it.id, it.name) } ?: emptyList(),  // Conversión de géneros si existen
-        videos = videos?.results?.map { VideoUi(it.key, it.name) } ?: emptyList() // Conversión de videos si existen
+        cast = credits?.cast?.map { CastUi(it.name, it.character, it.profilePath, it.popularity) }
+            ?: emptyList(),
+        genres = genres?.map { GenreUi(it.id, it.name) }
+            ?: emptyList(),  // Conversión de géneros si existen
+        videos = videos?.results?.map { VideoUi(it.key, it.name) }
+            ?: emptyList() // Conversión de videos si existen
     )
 }
 

@@ -48,7 +48,8 @@ data class CastDto(
     val castId: Int? = null,
     val character: String,
     val name: String,
-    val profilePath: String? = null
+    @SerialName("profile_path") val profilePath: String? = null,
+    val popularity: Double? = null
 )
 
 @Serializable
