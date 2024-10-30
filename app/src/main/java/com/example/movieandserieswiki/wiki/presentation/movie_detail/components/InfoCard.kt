@@ -35,6 +35,7 @@ import com.example.movieandserieswiki.wiki.presentation.models.CastUi
 import com.example.movieandserieswiki.wiki.presentation.models.GenreUi
 import com.example.movieandserieswiki.wiki.presentation.models.VideoUi
 import com.example.movieandserieswiki.wiki.presentation.movie_list.components.CircularRatingIndicator
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 
 @Composable
 fun InfoCard(
@@ -45,7 +46,6 @@ fun InfoCard(
     posterPath: String,
     genres: List<GenreUi>,
     cast: List<CastUi>,
-    videos: List<VideoUi>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -101,11 +101,7 @@ fun InfoCard(
             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
             modifier = Modifier.padding(bottom = 4.dp)
         )
-        /* Text(
-             text = "Duración: $duration",
-             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
-             modifier = Modifier.padding(bottom = 4.dp)
-         )*/
+
         Text(
             text = "Fecha de estreno: $overview",
             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
@@ -166,6 +162,7 @@ fun InfoCard(
                 }
             }
         }
+
     }
 
 }

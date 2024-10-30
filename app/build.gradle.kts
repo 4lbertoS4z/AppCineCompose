@@ -71,7 +71,9 @@ dependencies {
     implementation(libs.pagingCompose)
     implementation (libs.androidx.paging.compose.v100alpha17)
     //Youtube media
-    implementation (libs.core)
+   // implementation (libs.core)
+    implementation (libs.chromecast.sender)
+
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
