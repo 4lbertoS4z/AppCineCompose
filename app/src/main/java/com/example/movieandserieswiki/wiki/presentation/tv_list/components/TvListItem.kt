@@ -1,4 +1,4 @@
-package com.example.movieandserieswiki.wiki.presentation.movie_list.components
+package com.example.movieandserieswiki.wiki.presentation.tv_list.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
 import com.example.movieandserieswiki.wiki.presentation.components.CircularRatingIndicator
-import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
+import com.example.movieandserieswiki.wiki.presentation.models.TvUi
 
 @Composable
-fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun TvListItem(tvUi: TvUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val contentColor = if (isSystemInDarkTheme()) {
         Color.White
     } else {
@@ -40,15 +40,16 @@ fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Mo
             .height(220.dp),
         contentAlignment = Alignment.BottomStart
     ) {
-        // Utiliza AsyncImage para cargar la imagen
+        // Cargar la imagen del póster de la serie
         AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500${movieUi.posterPath}",
-            contentDescription = movieUi.title,
+            model = "https://image.tmdb.org/t/p/w500${tvUi.posterPath}",
+            contentDescription = tvUi.name,
             modifier = Modifier.size(220.dp),
-            contentScale = ContentScale.Crop, // Ajustar la escala de contenido
-            placeholder = painterResource(id = R.drawable.sample), // Reemplaza con tu recurso de imagen
-            error = painterResource(id = R.drawable.ic_launcher_background) // Reemplaza con tu recurso de imagen
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.sample),
+            error = painterResource(id = R.drawable.ic_launcher_background)
         )
+
         // Box con el fondo degradado
         Box(
             modifier = Modifier
@@ -65,20 +66,14 @@ fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Mo
                 ),
             contentAlignment = Alignment.BottomStart
         ) {
+            // Indicador de calificación
             CircularRatingIndicator(
-                rating = movieUi.voteAverage.formatted.toFloat(),
+                rating = tvUi.voteAverage.formatted.toFloat(),
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
                     .size(60.dp)
             )
         }
-
-
     }
 }
-
-
-
-
-

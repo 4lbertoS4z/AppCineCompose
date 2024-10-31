@@ -27,7 +27,7 @@ class RemoteMovieDataSource(private val httpClient: HttpClient) : MovieDataSourc
             .map { response -> response.results.map { it.toMovie() } }
     }
 
-    override suspend fun nowPlayingMovies(page: Int): Result<List<Movie>, NetworkError> {
+    override suspend fun getNowPlayingMovies(page: Int): Result<List<Movie>, NetworkError> {
         val url = "${ BuildConfig.BASE_URL}movie/now_playing?api_key=$apiKey&language=es-ES&page=$page"
         return safeCall<MoviesResponseDto> { httpClient.get(url) }
             .map { response -> response.results.map { it.toMovie() } }

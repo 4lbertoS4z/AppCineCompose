@@ -3,6 +3,7 @@ package com.example.movieandserieswiki.wiki.presentation.movie_detail
 import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.InfoCard
-import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.YouTubePlayer
+import com.example.movieandserieswiki.wiki.presentation.components.YouTubePlayer
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListState
 
 @Composable
@@ -57,8 +58,10 @@ fun MovieDetailScreen(state: MovieListState, modifier: Modifier = Modifier) {
                         cast = movie.cast,
                         modifier = Modifier.padding(bottom = 16.dp) // Añadir un margen inferior
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
+
 
             // Cargar todos los videos disponibles
             if (movie.videos.isNotEmpty()) {
@@ -77,8 +80,9 @@ fun MovieDetailScreen(state: MovieListState, modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(300.dp)
-                            .padding(bottom = 16.dp) // Añadir un margen inferior para separar los videos
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
+
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.example.movieandserieswiki.wiki.presentation.movie_detail.components
+package com.example.movieandserieswiki.wiki.presentation.components
 
 import android.util.Log
 import androidx.compose.runtime.Composable
