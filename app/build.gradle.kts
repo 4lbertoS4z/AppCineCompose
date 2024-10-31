@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
     debugImplementation(libs.bundles.compose.debug)
     implementation(libs.pagingCompose)
     implementation (libs.androidx.paging.compose.v100alpha17)

@@ -1,16 +1,8 @@
-package com.example.movieandserieswiki.wiki.presentation.movie_detail.components
+package com.example.movieandserieswiki.wiki.presentation.tv_detail.components
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,19 +21,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
-import com.example.movieandserieswiki.wiki.presentation.models.CastUi
-import com.example.movieandserieswiki.wiki.presentation.models.GenreUi
 import com.example.movieandserieswiki.wiki.presentation.components.CircularRatingIndicator
+import com.example.movieandserieswiki.wiki.presentation.models.TvCastUi
+import com.example.movieandserieswiki.wiki.presentation.models.TvGenreUi
+
 
 @Composable
-fun InfoCard(
-    title: String,
-    releaseDate: String,
+fun TvInfoCard(
+    name: String,
+    firstAirDate: String,
     voteAverage: Double,
     overview: String,
     posterPath: String,
-    genres: List<GenreUi>,
-    cast: List<CastUi>,
+    genres: List<TvGenreUi>,
+    cast: List<TvCastUi>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -61,18 +54,17 @@ fun InfoCard(
         // Imagen de portada
         AsyncImage(
             model = "https://image.tmdb.org/t/p/w500$posterPath",
-            contentDescription = title,
+            contentDescription = name,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
                 .clip(RoundedCornerShape(10.dp)),
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.sample),
-            error = painterResource(id = R.drawable.ic_launcher_background),
-
-            )
+            error = painterResource(id = R.drawable.ic_launcher_background)
+        )
         Text(
-            text = title,
+            text = name,
             style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp, color = Color.White),
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
@@ -91,7 +83,6 @@ fun InfoCard(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-
         Text(
             text = "Género: ${genres.joinToString { it.name }}",
             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
@@ -99,17 +90,16 @@ fun InfoCard(
         )
 
         Text(
-            text = "Fecha de estreno: $overview",
+            text = "Descripción: $overview",
             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
             modifier = Modifier.padding(bottom = 4.dp)
         )
+
         Text(
-            text = "Fecha de estreno: $releaseDate",
+            text = "Fecha de estreno: $firstAirDate",
             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
             modifier = Modifier.padding(bottom = 4.dp)
         )
-
-
 
         LazyRow(
             modifier = Modifier.padding(vertical = 4.dp)
@@ -120,16 +110,13 @@ fun InfoCard(
                         .padding(horizontal = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Crear la URL de la imagen del actor
-                    val profilePath =
-                        actor.profilePath?.trimStart('/') // Eliminar el primer slash si existe
+                    val profilePath = actor.profilePath?.trimStart('/')
                     val imageUrl = if (!profilePath.isNullOrEmpty()) {
                         "https://image.tmdb.org/t/p/w500/$profilePath"
                     } else {
-                        null // Manejar el caso de profilePath nulo o vacío
+                        null
                     }
 
-                    // Cargar la imagen del actor
                     AsyncImage(
                         model = imageUrl,
                         contentDescription = actor.name,
@@ -154,11 +141,8 @@ fun InfoCard(
                             style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
                         )
                     }
-
                 }
             }
         }
-
     }
-
 }

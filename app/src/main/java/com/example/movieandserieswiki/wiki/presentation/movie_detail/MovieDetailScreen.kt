@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.InfoCard
+import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.MovieInfoCard
 import com.example.movieandserieswiki.wiki.presentation.components.YouTubePlayer
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListState
 
@@ -48,7 +48,7 @@ fun MovieDetailScreen(state: MovieListState, modifier: Modifier = Modifier) {
         ) {
             movie.posterPath?.let {
                 item {
-                    InfoCard(
+                    MovieInfoCard(
                         title = movie.title,
                         releaseDate = movie.releaseDate,
                         voteAverage = movie.voteAverage.value,
