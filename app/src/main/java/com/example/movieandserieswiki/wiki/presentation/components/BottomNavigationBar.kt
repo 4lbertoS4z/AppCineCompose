@@ -16,7 +16,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     NavigationBar {
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Movie, contentDescription = "Movies") },
-            label = { Text("Movies") },
+            label = { Text("Películas") },
             selected = false, // Cambia esto según si estás en la pantalla de películas
             onClick = {
                 navController.navigate("movies") {

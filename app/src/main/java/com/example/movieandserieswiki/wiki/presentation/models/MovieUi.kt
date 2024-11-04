@@ -26,6 +26,7 @@ data class GenreUi(
 )
 
 data class CastUi(
+    val id: Int,
     val name: String,
     val character: String,
     val profilePath: String? = null,
@@ -54,8 +55,15 @@ fun Movie.toMovieUi(): MovieUi {
         posterPath = posterPath,
         backdropPath = backdropPath,
         popularity = popularity.toDisplayableNumber(),
-        cast = credits?.cast?.map { CastUi(it.name, it.character, it.profilePath, it.popularity) }
-            ?: emptyList(),
+        cast = credits?.cast?.map {
+            CastUi(
+                id = it.castId ?: -1,  // Asignar un valor predeterminado si `id` es nulo
+                name = it.name,
+                character = it.character,
+                profilePath = it.profilePath,
+                popularity = it.popularity
+            )
+        } ?: emptyList(),
         genres = genres?.map { GenreUi(it.id, it.name) }
             ?: emptyList(),  // Conversión de géneros si existen
         videos = videos?.results?.map { VideoUi(it.key, it.name) }
