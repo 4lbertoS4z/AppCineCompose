@@ -2,6 +2,7 @@ package com.example.movieandserieswiki.wiki.presentation.movie_detail.components
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,6 +43,7 @@ fun MovieInfoCard(
     posterPath: String,
     genres: List<GenreUi>,
     cast: List<CastUi>,
+    actorClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -117,7 +119,7 @@ fun MovieInfoCard(
             items(cast) { actor ->
                 Row(
                     modifier = Modifier
-                        .padding(horizontal = 4.dp),
+                        .padding(horizontal = 4.dp).clickable { actorClicked.invoke(actor.id) },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Crear la URL de la imagen del actor
@@ -145,6 +147,7 @@ fun MovieInfoCard(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Column {
+                        Log.d("ActorId", "Id del actor: ${actor.id}")
                         Text(
                             text = actor.name,
                             style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),

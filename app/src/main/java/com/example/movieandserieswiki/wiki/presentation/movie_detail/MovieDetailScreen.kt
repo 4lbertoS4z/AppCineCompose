@@ -19,12 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailAction
 import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.MovieInfoCard
 import com.example.movieandserieswiki.wiki.presentation.components.YouTubePlayer
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListState
 
 @Composable
-fun MovieDetailScreen(state: MovieListState, modifier: Modifier = Modifier) {
+fun MovieDetailScreen(state: MovieListState,actorClicked: (Int) -> Unit, modifier: Modifier = Modifier) {
     val contentColor = if (isSystemInDarkTheme()) {
         Color.White
     } else {
@@ -56,6 +57,9 @@ fun MovieDetailScreen(state: MovieListState, modifier: Modifier = Modifier) {
                         posterPath = movie.posterPath ?: "",
                         genres = movie.genres,
                         cast = movie.cast,
+                        actorClicked = { actorId ->
+                            actorClicked(actorId) // Pasar solo el actorId
+                        },
                         modifier = Modifier.padding(bottom = 16.dp) // Añadir un margen inferior
                     )
                     Spacer(modifier = Modifier.height(16.dp))

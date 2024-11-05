@@ -26,7 +26,7 @@ data class ActorCreditsDto(
 data class ActorCastDto(
     @SerialName("cast_id") val castId: Int? = null,
     val character: String,
-    @SerialName("title") val title: String,
+    @SerialName("title") val title: String? = null,
     @SerialName("release_date") val releaseDate: String? = null,
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("vote_average") val voteAverage: Double? = null,
@@ -37,7 +37,7 @@ data class ActorCastDto(
 @Serializable
 data class ActorCrewDto(
     val job: String,
-    @SerialName("title") val title: String,
+    @SerialName("title") val title: String? = null,
     @SerialName("release_date") val releaseDate: String? = null,
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("vote_average") val voteAverage: Double? = null,

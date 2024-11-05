@@ -1,5 +1,6 @@
 package com.example.movieandserieswiki.wiki.presentation.models
 
+import android.util.Log
 import com.example.movieandserieswiki.wiki.domain.Actor
 import java.text.NumberFormat
 import java.util.Locale
@@ -18,7 +19,7 @@ data class ActorUi(
 )
 
 data class ActorCastUi(
-    val title: String,
+    val title: String? = null,
     val character: String,
     val releaseDate: String? = null,
     val posterPath: String? = null,
@@ -28,7 +29,7 @@ data class ActorCastUi(
 )
 
 data class ActorCrewUi(
-    val title: String,
+    val title: String? = null,
     val job: String,
     val releaseDate: String? = null,
     val posterPath: String? = null,
@@ -43,6 +44,7 @@ data class ActorDisplayableNumber(
 )
 
 fun Actor.toActorUi(): ActorUi {
+    Log.d("ActorMapping", "Transforming Actor: id=$id, name=$name, popularity=$popularity, cast=$credits, crew=$credits")
     return ActorUi(
         id = id,
         name = name,

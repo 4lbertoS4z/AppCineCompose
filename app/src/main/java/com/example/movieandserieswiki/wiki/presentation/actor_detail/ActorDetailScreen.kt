@@ -5,7 +5,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,12 +27,12 @@ fun ActorDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: ActorDetailViewModel = koinViewModel() // Usamos Koin para obtener el ViewModel
 ) {
-    // Cargamos los detalles del actor
+    val state = viewModel.state.collectAsStateWithLifecycle().value // Suponiendo que el ViewModel tiene un state
+
+    // Llamar a loadActorDetails cuando se inicia la pantalla
     LaunchedEffect(actorId) {
         viewModel.loadActorDetails(actorId)
     }
-
-    val state = viewModel.state.collectAsStateWithLifecycle().value // Suponiendo que el ViewModel tiene un state
 
     val contentColor = if (isSystemInDarkTheme()) {
         Color.White

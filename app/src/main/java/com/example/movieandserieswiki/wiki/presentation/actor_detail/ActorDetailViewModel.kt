@@ -1,5 +1,6 @@
 package com.example.movieandserieswiki.wiki.presentation.actor_detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieandserieswiki.core.domain.util.onError
@@ -34,6 +35,7 @@ class ActorDetailViewModel(
         _state.value = ActorDetailState(isLoading = true) // Indica que se está cargando
         viewModelScope.launch {
             actorDataSource.getDetailActor(actorId).onSuccess { actorDetail ->
+                Log.d("ActorDetailViewModel", "Actor detail: $actorDetail")
                 _state.value = ActorDetailState(
                     actorDetail = actorDetail.toActorUi(),
                     isLoading = false

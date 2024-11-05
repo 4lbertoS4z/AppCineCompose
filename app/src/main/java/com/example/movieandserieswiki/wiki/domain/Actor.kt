@@ -18,7 +18,7 @@ data class ActorCreditsResponse(
 )
 
 data class ActorCast(
-    val title: String,
+    val title: String? = null,
     val character: String,
     val releaseDate: String? = null,
     val posterPath: String? = null,
@@ -28,7 +28,7 @@ data class ActorCast(
 )
 
 data class ActorCrew(
-    val title: String,
+    val title: String? = null,
     val job: String,
     val releaseDate: String? = null,
     val posterPath: String? = null,

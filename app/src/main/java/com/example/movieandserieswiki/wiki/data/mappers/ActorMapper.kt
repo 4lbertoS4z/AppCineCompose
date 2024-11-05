@@ -34,7 +34,7 @@ fun ActorCastDto.toCast(): ActorCast {
 
     return ActorCast(
         character = this.character,
-        title = this.title,
+        title = this.title ?: "",
         releaseDate = this.releaseDate,
         posterPath = this.posterPath,
         voteAverage = this.voteAverage ?: 0.0, // Manejo de campo opcional
@@ -46,7 +46,7 @@ fun ActorCastDto.toCast(): ActorCast {
 fun ActorCrewDto.toCrew(): ActorCrew {
     return ActorCrew(
         job = this.job,
-        title = this.title,
+        title = this.title?: "",
         releaseDate = this.releaseDate,
         posterPath = this.posterPath,
         voteAverage = this.voteAverage ?: 0.0, // Manejo de campo opcional

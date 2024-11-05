@@ -11,8 +11,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.example.movieandserieswiki.core.presentation.util.ObserveAsEvents
 import com.example.movieandserieswiki.core.presentation.util.toString
+import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailAction
+import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
 import com.example.movieandserieswiki.wiki.presentation.movie_detail.MovieDetailScreen
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListAction
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListEvent
@@ -24,8 +27,10 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun AdaptativeMovieListDetailPane(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: MovieListViewModel = koinViewModel()
+    viewModel: MovieListViewModel = koinViewModel(),
+    actorViewModel: ActorDetailViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -66,12 +71,18 @@ fun AdaptativeMovieListDetailPane(
         detailPane = {
             AnimatedPane {
                 MovieDetailScreen(
-                    state = state
-                )
+                    state = state,
+                    actorClicked = { actorId ->
+                        // Navegar al detalle del actor y cargar detalles en ActorDetailViewModel
+                        actorViewModel.loadActorDetails(actorId)
+
+                        // Navegar usando el navController
+                        navController.navigate("actor/${actorId}") // Usar la ruta del actor
+                    })
             }
         },
         modifier = modifier
 
 
-            )
-        }
+    )
+}
