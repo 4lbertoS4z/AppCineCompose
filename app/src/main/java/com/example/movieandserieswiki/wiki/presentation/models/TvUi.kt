@@ -29,6 +29,7 @@ data class TvGenreUi(
 )
 
 data class TvCastUi(
+    val id: Int,
     val name: String,
     val character: String,
     val profilePath: String? = null,
@@ -60,7 +61,7 @@ fun Tv.toTvUi(): TvUi {
         posterPath = posterPath,
         backdropPath = backdropPath,
         popularity = popularity.toTvDisplayableNumber(),
-        cast = credits?.cast?.map { TvCastUi(it.name, it.character, it.profilePath, it.popularity) }
+        cast = credits?.cast?.map { TvCastUi(id = it.castId ?: -1, it.name, it.character, it.profilePath, it.popularity) }
             ?: emptyList(),
         genres = genres?.map { TvGenreUi(it.id, it.name) }
             ?: emptyList(),

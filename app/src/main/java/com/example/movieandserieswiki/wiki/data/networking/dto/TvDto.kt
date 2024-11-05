@@ -50,7 +50,7 @@ data class TvCreditsDto(
 
 @Serializable
 data class TvCastDto(
-    @SerialName("cast_id") val castId: Int? = null,
+    @SerialName("id") val castId: Int? = null,
     val character: String,
     val name: String,
     @SerialName("profile_path") val profilePath: String? = null,

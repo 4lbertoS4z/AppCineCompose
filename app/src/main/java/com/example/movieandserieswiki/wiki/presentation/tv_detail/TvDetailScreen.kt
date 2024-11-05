@@ -22,7 +22,7 @@ import com.example.movieandserieswiki.wiki.presentation.tv_detail.components.TvI
 import com.example.movieandserieswiki.wiki.presentation.tv_list.TvListState
 
 @Composable
-fun TvDetailScreen(state: TvListState, modifier: Modifier = Modifier) {
+fun TvDetailScreen(state: TvListState, actorClicked: (Int) -> Unit, modifier: Modifier = Modifier) {
     val contentColor = if (isSystemInDarkTheme()) {
         Color.White
     } else {
@@ -53,6 +53,9 @@ fun TvDetailScreen(state: TvListState, modifier: Modifier = Modifier) {
                         posterPath = tv.posterPath ?: "",
                         genres = tv.genres,
                         cast = tv.cast,
+                        actorClicked = { actorId ->
+                            actorClicked(actorId) // Pasar solo el actorId
+                        },
                         modifier = Modifier.padding(bottom = 16.dp) // Añadir un margen inferior
                     )
                     Spacer(modifier = Modifier.height(16.dp))

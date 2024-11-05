@@ -2,6 +2,7 @@ package com.example.movieandserieswiki.wiki.presentation.tv_detail.components
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -35,6 +36,7 @@ fun TvInfoCard(
     posterPath: String,
     genres: List<TvGenreUi>,
     cast: List<TvCastUi>,
+    actorClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -107,7 +109,7 @@ fun TvInfoCard(
             items(cast) { actor ->
                 Row(
                     modifier = Modifier
-                        .padding(horizontal = 4.dp),
+                        .padding(horizontal = 4.dp).clickable { actorClicked.invoke(actor.id) },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val profilePath = actor.profilePath?.trimStart('/')

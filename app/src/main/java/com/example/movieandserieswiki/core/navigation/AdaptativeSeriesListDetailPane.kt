@@ -11,8 +11,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.example.movieandserieswiki.core.presentation.util.ObserveAsEvents
 import com.example.movieandserieswiki.core.presentation.util.toString
+import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
 import com.example.movieandserieswiki.wiki.presentation.tv_detail.TvDetailScreen
 import com.example.movieandserieswiki.wiki.presentation.tv_list.TvListAction
 import com.example.movieandserieswiki.wiki.presentation.tv_list.TvListEvent
@@ -23,8 +25,10 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun AdaptativeSeriesListDetailPane(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: TvListViewModel = koinViewModel()
+    viewModel: TvListViewModel = koinViewModel(),
+    actorViewModel: ActorDetailViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -55,7 +59,7 @@ fun AdaptativeSeriesListDetailPane(
                                 navigator.navigateTo(
                                     pane = ListDetailPaneScaffoldRole.Detail
                                 )
-                                
+
                             }
                         }
                     }
@@ -65,7 +69,14 @@ fun AdaptativeSeriesListDetailPane(
         detailPane = {
             AnimatedPane {
                 TvDetailScreen(
-                    state = state
+                    state = state,
+                    actorClicked = { actorId ->
+                        // Navegar al detalle del actor y cargar detalles en ActorDetailViewModel
+                        actorViewModel.loadActorDetails(actorId)
+
+                        // Navegar usando el navController
+                        navController.navigate("actor/${actorId}") // Usar la ruta del actor
+                    }
                 )
             }
         },
