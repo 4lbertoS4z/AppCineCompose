@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.movieandserieswiki.core.domain.util.DomainError
 import com.example.movieandserieswiki.core.domain.util.Result
-import com.example.movieandserieswiki.wiki.domain.Movie
 import com.example.movieandserieswiki.wiki.domain.Tv
 import com.example.movieandserieswiki.wiki.domain.TvDataSource
 

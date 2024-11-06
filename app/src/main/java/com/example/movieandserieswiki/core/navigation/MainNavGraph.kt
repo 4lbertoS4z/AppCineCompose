@@ -18,7 +18,7 @@ fun MainNavGraph(navController: NavHostController, modifier: Modifier = Modifier
             AdaptativeMovieListDetailPane(navController = navController)
         }
         composable("series") {
-            AdaptativeSeriesListDetailPane(navController= navController)
+            AdaptativeSeriesListDetailPane(navController = navController)
         }
         composable("actor/{actorId}") { backStackEntry ->
             val actorId = backStackEntry.arguments?.getString("actorId")?.toInt() ?: 0

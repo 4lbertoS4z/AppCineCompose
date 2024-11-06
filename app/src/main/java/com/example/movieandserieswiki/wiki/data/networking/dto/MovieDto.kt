@@ -14,17 +14,19 @@ data class MovieDto(
     @SerialName("release_date") val releaseDate: String? = null,  // Cambiado a opcional
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("backdrop_path") val backdropPath: String? = null,
-    val popularity: Double?=null,
+    val popularity: Double? = null,
     val genres: List<GenreDto>? = null,
     val runtime: Int? = null,
     val videos: VideosDto? = null,
     val credits: CreditsDto? = null
 )
+
 @Serializable
 data class GenreDto(
     val id: Int,
     val name: String
 )
+
 @Serializable
 data class VideosDto(
     val results: List<VideoDto>
@@ -37,6 +39,7 @@ data class VideoDto(
     val site: String,  // Por ejemplo, YouTube
     val type: String   // Ej. "Trailer"
 )
+
 @Serializable
 data class CreditsDto(
     val cast: List<CastDto>,

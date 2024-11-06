@@ -22,7 +22,7 @@ fun MovieDto.toMovie(): Movie {
         releaseDate = this.releaseDate ?: "Fecha no disponible", // Manejo de campo opcional
         posterPath = this.posterPath,
         backdropPath = this.backdropPath,
-        popularity = this.popularity?:0.0,
+        popularity = this.popularity ?: 0.0,
         genres = this.genres?.map { it.toGenre() } ?: emptyList(), // Manejo de lista nula
         runtime = this.runtime ?: 0, // Manejo de campo opcional
         videos = this.videos?.toVideosResponse(),  // Conversión de Videos (puede ser nula)
@@ -55,7 +55,6 @@ fun CreditsDto.toCreditsResponse(): CreditsResponse {
 }
 
 fun CastDto.toCast(): Cast {
-    Log.d("CastDto", "ProfilePath: $profilePath")
     return Cast(
         castId = this.castId,
         character = this.character,

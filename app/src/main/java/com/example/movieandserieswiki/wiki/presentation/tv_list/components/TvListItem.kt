@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
+import com.example.movieandserieswiki.wiki.data.common.BASE_IMG_URL
 import com.example.movieandserieswiki.wiki.presentation.components.CircularRatingIndicator
 import com.example.movieandserieswiki.wiki.presentation.models.TvUi
 
@@ -42,12 +43,12 @@ fun TvListItem(tvUi: TvUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
     ) {
         // Cargar la imagen del póster de la serie
         AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500${tvUi.posterPath}",
+            model = "${BASE_IMG_URL}${tvUi.posterPath}",
             contentDescription = tvUi.name,
             modifier = Modifier.size(220.dp),
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.sample),
-            error = painterResource(id = R.drawable.ic_launcher_background)
+            error = painterResource(id = R.drawable.sample)
         )
 
         // Box con el fondo degradado

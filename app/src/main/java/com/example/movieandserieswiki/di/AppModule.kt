@@ -17,9 +17,8 @@ import com.example.movieandserieswiki.wiki.presentation.tv_list.TvListViewModel
 import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
 
 
-
 val appModule = module {
-    single{ HttpClientFactory.create(CIO.create())}
+    single { HttpClientFactory.create(CIO.create()) }
     singleOf(::RemoteMovieDataSource).bind<MovieDataSource>()
     singleOf(::RemoteTvDataSource).bind<TvDataSource>()
     singleOf(::RemoteActorDataSource).bind<ActorDataSource>()

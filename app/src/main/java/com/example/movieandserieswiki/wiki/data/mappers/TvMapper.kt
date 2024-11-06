@@ -20,12 +20,15 @@ fun TvDto.toTv(): Tv {
     return Tv(
         id = this.id,
         name = this.name,
-        originalName = this.originalName ?: "Nombre original no disponible", // Manejo de campo opcional
+        originalName = this.originalName
+            ?: "Nombre original no disponible", // Manejo de campo opcional
         overview = this.overview,
         voteAverage = this.voteAverage ?: 0.0, // Manejo de campo opcional
         voteCount = this.voteCount ?: 0, // Manejo de campo opcional
-        firstAirDate = this.firstAirDate ?: "Fecha de estreno no disponible", // Manejo de campo opcional
-        lastAirDate = this.lastAirDate ?: "Fecha de última emisión no disponible", // Manejo de campo opcional
+        firstAirDate = this.firstAirDate
+            ?: "Fecha de estreno no disponible", // Manejo de campo opcional
+        lastAirDate = this.lastAirDate
+            ?: "Fecha de última emisión no disponible", // Manejo de campo opcional
         numberOfEpisodes = this.numberOfEpisodes ?: 0, // Manejo de campo opcional
         numberOfSeasons = this.numberOfSeasons ?: 0, // Manejo de campo opcional
         posterPath = this.posterPath,
@@ -62,7 +65,6 @@ fun TvCreditsDto.toCreditsResponse(): TvCreditsResponse {
 }
 
 fun TvCastDto.toCast(): TvCast {
-    Log.d("CastDto", "ProfilePath: $profilePath")
     return TvCast(
         castId = this.castId,
         character = this.character,

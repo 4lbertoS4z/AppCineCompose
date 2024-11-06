@@ -1,11 +1,8 @@
 package com.example.movieandserieswiki.wiki.presentation.actor_detail
 
-import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
@@ -27,7 +24,8 @@ fun ActorDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: ActorDetailViewModel = koinViewModel() // Usamos Koin para obtener el ViewModel
 ) {
-    val state = viewModel.state.collectAsStateWithLifecycle().value // Suponiendo que el ViewModel tiene un state
+    val state =
+        viewModel.state.collectAsStateWithLifecycle().value // Suponiendo que el ViewModel tiene un state
 
     // Llamar a loadActorDetails cuando se inicia la pantalla
     LaunchedEffect(actorId) {
@@ -49,7 +47,6 @@ fun ActorDetailScreen(
         }
     } else if (state.actorDetail != null) {
         val actor = state.actorDetail
-        Log.d("ActorDetailScreen", "Cargando detalles del actor: ${actor.name}")
 
         LazyColumn(
             modifier = modifier.fillMaxSize(),
@@ -59,27 +56,14 @@ fun ActorDetailScreen(
                 item {
                     ActorInfoCard(
                         actorUi = actor,
-                        onClick = { /* Acción al hacer clic, si es necesario */ },
+                        cast = actor.cast,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+
                 }
             }
 
-            item {
-                Text(
-                    text = "Biografía:",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
-                )
-                Text(
-                    text = actor.biography ?: "Biografía no disponible",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = contentColor,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
+
         }
     } else {
         Box(

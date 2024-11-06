@@ -26,6 +26,7 @@ class MoviePagingSource(
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if (result.data.isEmpty()) null else page + 1
             )
+
             is Result.Error -> LoadResult.Error(Throwable(result.error.toString()))
         }
     }

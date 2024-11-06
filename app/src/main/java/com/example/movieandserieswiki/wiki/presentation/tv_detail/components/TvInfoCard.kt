@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
+import com.example.movieandserieswiki.wiki.data.common.BASE_IMG_URL
 import com.example.movieandserieswiki.wiki.presentation.components.CircularRatingIndicator
 import com.example.movieandserieswiki.wiki.presentation.models.TvCastUi
 import com.example.movieandserieswiki.wiki.presentation.models.TvGenreUi
@@ -55,7 +56,7 @@ fun TvInfoCard(
     ) {
         // Imagen de portada
         AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500$posterPath",
+            model = "${BASE_IMG_URL}$posterPath",
             contentDescription = name,
             modifier = Modifier
                 .fillMaxWidth()
@@ -63,7 +64,7 @@ fun TvInfoCard(
                 .clip(RoundedCornerShape(10.dp)),
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.sample),
-            error = painterResource(id = R.drawable.ic_launcher_background)
+            error = painterResource(id = R.drawable.sample)
         )
         Text(
             text = name,
@@ -112,9 +113,9 @@ fun TvInfoCard(
                         .padding(horizontal = 4.dp).clickable { actorClicked.invoke(actor.id) },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val profilePath = actor.profilePath?.trimStart('/')
+                    val profilePath = actor.profilePath
                     val imageUrl = if (!profilePath.isNullOrEmpty()) {
-                        "https://image.tmdb.org/t/p/w500/$profilePath"
+                        "${BASE_IMG_URL}$profilePath"
                     } else {
                         null
                     }
@@ -127,7 +128,7 @@ fun TvInfoCard(
                             .clip(RoundedCornerShape(5.dp)),
                         contentScale = ContentScale.Crop,
                         placeholder = painterResource(id = R.drawable.sample),
-                        error = painterResource(id = R.drawable.ic_launcher_background),
+                        error = painterResource(id = R.drawable.sample),
                         onError = {
                             Log.e("ImageLoadError", "Failed to load image for ${actor.name}")
                         }

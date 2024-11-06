@@ -14,7 +14,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.example.movieandserieswiki.core.presentation.util.ObserveAsEvents
 import com.example.movieandserieswiki.core.presentation.util.toString
-import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailAction
 import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
 import com.example.movieandserieswiki.wiki.presentation.movie_detail.MovieDetailScreen
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListAction

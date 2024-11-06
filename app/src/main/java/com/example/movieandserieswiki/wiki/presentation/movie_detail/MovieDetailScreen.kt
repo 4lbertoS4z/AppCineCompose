@@ -19,9 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailAction
-import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.MovieInfoCard
 import com.example.movieandserieswiki.wiki.presentation.components.YouTubePlayer
+import com.example.movieandserieswiki.wiki.presentation.movie_detail.components.MovieInfoCard
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListState
 
 @Composable
