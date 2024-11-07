@@ -14,22 +14,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.example.movieandserieswiki.core.presentation.util.ObserveAsEvents
 import com.example.movieandserieswiki.core.presentation.util.toString
-import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
-import com.example.movieandserieswiki.wiki.presentation.movie_detail.MovieDetailScreen
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListAction
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListEvent
-import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListScreen
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListViewModel
+import com.example.movieandserieswiki.wiki.presentation.search_list.SearchListScreen
 import org.koin.androidx.compose.koinViewModel
 
-
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun AdaptativeMovieListDetailPane(
+fun AdaptativeSearchList(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: MovieListViewModel = koinViewModel(),
-    actorViewModel: ActorDetailViewModel = koinViewModel()
+    movieListViewModel: MovieListViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -45,25 +42,26 @@ fun AdaptativeMovieListDetailPane(
             }
         }
     }
+
     val navigator = rememberListDetailPaneScaffoldNavigator<Any>()
+
     NavigableListDetailPaneScaffold(
         navigator = navigator,
         listPane = {
             AnimatedPane {
-                MovieListScreen(
+                SearchListScreen(
                     viewModel = viewModel,
                     state = state,
                     onAction = { action ->
-                        viewModel.onAction(action)
                         when (action) {
-                            is MovieListAction.OnMovieSelected -> {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Detail
-                                )
-
+                            is MovieListAction.OnSearchQueryChanged -> {
+                                // Realizamos la búsqueda cada vez que cambia la consulta
+                                movieListViewModel.onAction(action)
                             }
-
-                            is MovieListAction.OnSearchQueryChanged -> TODO()
+                            is MovieListAction.OnMovieSelected -> {
+                                // Navegar a la pantalla de detalles de la película
+                                navigator.navigateTo(ListDetailPaneScaffoldRole.Detail)
+                            }
                         }
                     }
                 )
@@ -71,19 +69,10 @@ fun AdaptativeMovieListDetailPane(
         },
         detailPane = {
             AnimatedPane {
-                MovieDetailScreen(
-                    state = state,
-                    actorClicked = { actorId ->
-                        // Navegar al detalle del actor y cargar detalles en ActorDetailViewModel
-                        actorViewModel.loadActorDetails(actorId)
-
-                        // Navegar usando el navController
-                        navController.navigate("actor/${actorId}") // Usar la ruta del actor
-                    })
+                // Aquí se mostraría el detalle de la película seleccionada
+                // Si es necesario, puedes agregar una pantalla de detalle específica para la búsqueda
             }
         },
         modifier = modifier
-
-
     )
 }

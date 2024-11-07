@@ -30,6 +30,12 @@ import java.time.format.DateTimeFormatter
 class MovieListViewModel(
     private val movieDataSource: MovieDataSource
 ) : ViewModel() {
+    private val _searchState = MutableStateFlow<List<MovieUi>>(emptyList())
+    val searchState = _searchState
+    private val _state = MutableStateFlow(MovieListState())
+    val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), MovieListState())
+    private val _events = Channel<MovieListEvent>()
+    val events = _events.receiveAsFlow()
 
     val popularMovies: Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(
@@ -61,15 +67,31 @@ class MovieListViewModel(
         pagingSourceFactory = { MoviePagingSource(movieDataSource, MovieType.NOW_PLAYING) }
     ).flow.cachedIn(viewModelScope)
 
-    private val _state = MutableStateFlow(MovieListState())
-    val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), MovieListState())
-    private val _events = Channel<MovieListEvent>()
-    val events = _events.receiveAsFlow()
+
+
+    // Función para manejar la búsqueda de películas
+    private fun searchMovies(query: String) {
+        _state.update { it.copy(isLoading = true) }
+
+        viewModelScope.launch {
+            movieDataSource.searchMovie(query).onSuccess { movies ->
+                _state.update { it.copy(isLoading = false) }
+                _searchState.value = movies.map { it.toMovieUi() } // Mapear los resultados a MovieUi
+            }.onError { error ->
+                _state.update { it.copy(isLoading = false) }
+                _events.send(MovieListEvent.Error(error))
+            }
+        }
+    }
 
     fun onAction(action: MovieListAction) {
         when (action) {
             is MovieListAction.OnMovieSelected -> {
                 selectedMovie(action.movieUi)
+            }
+            is MovieListAction.OnSearchQueryChanged -> {
+                // Llamar a la búsqueda cuando el usuario cambia el texto
+                searchMovies(action.query)
             }
         }
     }

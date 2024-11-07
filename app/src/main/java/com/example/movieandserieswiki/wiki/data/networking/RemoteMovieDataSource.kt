@@ -40,4 +40,9 @@ class RemoteMovieDataSource(private val httpClient: HttpClient) : MovieDataSourc
         return safeCall<MovieDto> { httpClient.get(url) }
             .map { response -> response.toMovie() }
     }
+    override suspend fun searchMovie(query: String): Result<List<Movie>, NetworkError> {
+        val url = "${BuildConfig.BASE_URL}search/movie?api_key=${API_KEY}&language=es-ES&query=$query"
+        return safeCall<MoviesResponseDto> { httpClient.get(url) }
+            .map { response -> response.results.map { it.toMovie() } }
+    }
 }

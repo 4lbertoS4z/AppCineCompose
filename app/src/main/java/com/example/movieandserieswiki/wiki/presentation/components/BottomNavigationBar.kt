@@ -3,6 +3,7 @@ package com.example.movieandserieswiki.wiki.presentation.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -34,13 +35,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                 }
             }
         )
+        // Búsqueda
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Person, contentDescription = "Actores") },
-            label = { Text("Actores") },
-            selected = false, // Cambia esto según si estás en la pantalla de series
+            icon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
+            label = { Text("Buscar") },
+            selected = false, // Cambia la selección según la ruta actual
             onClick = {
-                navController.navigate("series") {
-                    popUpTo("movies") { inclusive = true }
+                navController.navigate("search") {
+                    popUpTo("search") { inclusive = true }
                 }
             }
         )

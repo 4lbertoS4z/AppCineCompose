@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.compose.MovieAndSeriesWikiTheme
 import com.example.movieandserieswiki.core.navigation.AdaptativeMovieListDetailPane
 import com.example.movieandserieswiki.core.navigation.MainNavGraph
-import com.example.movieandserieswiki.ui.theme.MovieAndSeriesWikiTheme
 import com.example.movieandserieswiki.wiki.presentation.components.BottomNavigationBar
 
 class MainActivity : ComponentActivity() {

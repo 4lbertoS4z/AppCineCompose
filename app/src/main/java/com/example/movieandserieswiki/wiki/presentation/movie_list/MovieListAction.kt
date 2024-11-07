@@ -4,5 +4,5 @@ import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
 
 sealed interface MovieListAction {
     data class OnMovieSelected(val movieUi: MovieUi) : MovieListAction
-
+    data class OnSearchQueryChanged(val query: String) : MovieListAction
 }

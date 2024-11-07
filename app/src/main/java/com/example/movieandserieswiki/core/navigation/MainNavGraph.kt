@@ -20,6 +20,10 @@ fun MainNavGraph(navController: NavHostController, modifier: Modifier = Modifier
         composable("series") {
             AdaptativeSeriesListDetailPane(navController = navController)
         }
+        composable("search") {
+            AdaptativeSearchList(navController = navController)
+        }
+
         composable("actor/{actorId}") { backStackEntry ->
             val actorId = backStackEntry.arguments?.getString("actorId")?.toInt() ?: 0
             ActorDetailScreen(actorId = actorId)
