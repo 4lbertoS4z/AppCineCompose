@@ -13,6 +13,7 @@ import com.example.movieandserieswiki.wiki.data.paging.TvPagingSource
 import com.example.movieandserieswiki.wiki.data.paging.TvType
 import com.example.movieandserieswiki.wiki.domain.Tv
 import com.example.movieandserieswiki.wiki.domain.TvDataSource
+import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
 import com.example.movieandserieswiki.wiki.presentation.models.TvUi
 import com.example.movieandserieswiki.wiki.presentation.models.toTvUi
 import kotlinx.coroutines.channels.Channel
@@ -53,11 +54,30 @@ class TvListViewModel(private val tvDataSource: TvDataSource) : ViewModel() {
     val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), TvListState())
     private val _events = Channel<TvListEvent>()
     val events = _events.receiveAsFlow()
+    private val _searchState = MutableStateFlow<List<TvUi>>(emptyList())
+    val searchState = _searchState
+
+    private fun searchTvs(query: String){
+        _state.update { it.copy(isLoading = true) }
+        viewModelScope.launch {
+            tvDataSource.searchTv(query).onSuccess { tvs ->
+                _state.update { it.copy(isLoading = false) }
+                _searchState.value = tvs.map { it.toTvUi() }
+            }.onError { error ->
+                _state.update { it.copy(isLoading = false) }
+                _events.send(TvListEvent.Error(error))
+            }
+        }
+    }
+
 
     fun onAction(action: TvListAction) {
         when (action) {
             is TvListAction.OnTvSelected -> {
                 selectedTv(action.tvUi)
+            }
+            is TvListAction.OnSearchQueryChanged -> {
+                searchTvs(action.query)
             }
         }
     }

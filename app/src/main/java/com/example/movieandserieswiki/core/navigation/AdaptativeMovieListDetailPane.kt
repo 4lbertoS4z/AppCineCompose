@@ -63,7 +63,7 @@ fun AdaptativeMovieListDetailPane(
 
                             }
 
-                            is MovieListAction.OnSearchQueryChanged -> TODO()
+                            is MovieListAction.OnSearchQueryChanged ->  viewModel.onAction(action)
                         }
                     }
                 )

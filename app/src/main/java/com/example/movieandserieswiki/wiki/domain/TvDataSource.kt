@@ -8,4 +8,5 @@ interface TvDataSource {
     suspend fun getOnAirNowTv(page: Int): Result<List<Tv>, NetworkError>
     suspend fun getBestScoreTv(page: Int): Result<List<Tv>, NetworkError>
     suspend fun getDetailTv(tvId: Int): Result<Tv, NetworkError>
+    suspend fun searchTv(query: String): Result<List<Tv>, NetworkError>
 }

@@ -61,6 +61,8 @@ fun AdaptativeSeriesListDetailPane(
                                 )
 
                             }
+                            is TvListAction.OnSearchQueryChanged -> viewModel.onAction(action)
+
                         }
                     }
                 )
