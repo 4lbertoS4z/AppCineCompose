@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.compose.MovieAndSeriesWikiTheme
 import com.example.movieandserieswiki.core.navigation.AdaptativeMovieListDetailPane
-import com.example.movieandserieswiki.ui.theme.MovieAndSeriesWikiTheme
+import com.example.movieandserieswiki.core.navigation.MainNavGraph
+import com.example.movieandserieswiki.wiki.presentation.components.BottomNavigationBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,11 +20,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MovieAndSeriesWikiTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   AdaptativeMovieListDetailPane(modifier = Modifier.padding(innerPadding))
+                val navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        BottomNavigationBar(navController = navController)
+                    }
+                ) { innerPadding ->
+                    MainNavGraph(
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
     }
 }
-

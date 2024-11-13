@@ -1,6 +1,7 @@
 package com.example.movieandserieswiki.wiki.data.mappers
 
 
+import android.util.Log
 import com.example.movieandserieswiki.wiki.data.networking.dto.CastDto
 import com.example.movieandserieswiki.wiki.data.networking.dto.CreditsDto
 import com.example.movieandserieswiki.wiki.data.networking.dto.CrewDto
@@ -19,9 +20,9 @@ fun MovieDto.toMovie(): Movie {
         voteAverage = this.voteAverage ?: 0.0, // Manejo de campo opcional
         voteCount = this.voteCount ?: 0, // Manejo de campo opcional
         releaseDate = this.releaseDate ?: "Fecha no disponible", // Manejo de campo opcional
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         backdropPath = this.backdropPath,
-        popularity = this.popularity,
+        popularity = this.popularity ?: 0.0,
         genres = this.genres?.map { it.toGenre() } ?: emptyList(), // Manejo de lista nula
         runtime = this.runtime ?: 0, // Manejo de campo opcional
         videos = this.videos?.toVideosResponse(),  // Conversión de Videos (puede ser nula)
@@ -58,7 +59,8 @@ fun CastDto.toCast(): Cast {
         castId = this.castId,
         character = this.character,
         name = this.name,
-        profilePath = this.profilePath
+        profilePath = this.profilePath,
+        popularity = this.popularity
     )
 }
 

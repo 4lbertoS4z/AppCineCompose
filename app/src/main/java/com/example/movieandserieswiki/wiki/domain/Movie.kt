@@ -42,7 +42,8 @@ data class Cast(
     val castId: Int? = null,  // Opcional
     val character: String,
     val name: String,
-    val profilePath: String? = null
+    val profilePath: String? = null,
+    val popularity: Double? = null  // Opcional
 )
 
 data class Crew(
