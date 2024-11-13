@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class ActorDto(
     val id: Int,
     val name: String,
-    val biography: String,
+    val biography: String? = null,
     @SerialName("birthday") val birthday: String? = null,
     @SerialName("deathday") val deathday: String? = null,
     @SerialName("place_of_birth") val placeOfBirth: String? = null,

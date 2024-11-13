@@ -13,12 +13,12 @@ fun ActorDto.toActor(): Actor {
     return Actor(
         id = this.id,
         name = this.name,
-        biography = this.biography,
+        biography = this.biography ?: "Biografía no disponible",
         birthday = this.birthday ?: "Fecha de nacimiento no disponible", // Manejo de campo opcional
         deathday = this.deathday, // Este puede ser nulo
         placeOfBirth = this.placeOfBirth
             ?: "Lugar de nacimiento no disponible", // Manejo de campo opcional
-        profilePath = this.profilePath,
+        profilePath = this.profilePath?:"",
         popularity = this.popularity ?: 0.0, // Manejo de campo opcional
         credits = this.credits?.toCreditsResponse() // Conversión de Créditos (puede ser nula)
     )

@@ -37,12 +37,12 @@ fun BottomNavigationBar(navController: NavHostController) {
         )
         // Búsqueda
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
-            label = { Text("Buscar") },
+            icon = { Icon(Icons.Filled.Person, contentDescription = "Actors") },
+            label = { Text("Actor") },
             selected = false, // Cambia la selección según la ruta actual
             onClick = {
-                navController.navigate("search") {
-                    popUpTo("search") { inclusive = true }
+                navController.navigate("actors") {
+                    popUpTo("actors") { inclusive = true }
                 }
             }
         )

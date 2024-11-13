@@ -15,6 +15,8 @@ import com.example.movieandserieswiki.wiki.domain.TvDataSource
 import com.example.movieandserieswiki.wiki.presentation.movie_list.MovieListViewModel
 import com.example.movieandserieswiki.wiki.presentation.tv_list.TvListViewModel
 import com.example.movieandserieswiki.wiki.presentation.actor_detail.ActorDetailViewModel
+import com.example.movieandserieswiki.wiki.presentation.search_actor_list.SearchActorListViewModel
+
 
 
 val appModule = module {
@@ -25,4 +27,5 @@ val appModule = module {
     viewModelOf(::MovieListViewModel)
     viewModelOf(::TvListViewModel)
     viewModelOf(::ActorDetailViewModel)
+    viewModelOf(::SearchActorListViewModel)
 }
