@@ -20,7 +20,7 @@ fun MovieDto.toMovie(): Movie {
         voteAverage = this.voteAverage ?: 0.0, // Manejo de campo opcional
         voteCount = this.voteCount ?: 0, // Manejo de campo opcional
         releaseDate = this.releaseDate ?: "Fecha no disponible", // Manejo de campo opcional
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         backdropPath = this.backdropPath,
         popularity = this.popularity ?: 0.0,
         genres = this.genres?.map { it.toGenre() } ?: emptyList(), // Manejo de lista nula

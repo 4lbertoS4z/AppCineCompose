@@ -3,6 +3,7 @@ package com.example.movieandserieswiki.wiki.presentation.movie_detail.components
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -47,6 +48,11 @@ fun MovieInfoCard(
     actorClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val contentColor = if (isSystemInDarkTheme()) {
+        Color.White
+    } else {
+        Color.Black
+    }
     Column(
         modifier = modifier
             .padding(16.dp)
@@ -76,13 +82,13 @@ fun MovieInfoCard(
             )
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp, color = Color.White),
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp, color = contentColor),
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
             text = "Puntuación:",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 8.dp)
         )
         CircularRatingIndicator(
@@ -97,18 +103,18 @@ fun MovieInfoCard(
 
         Text(
             text = "Género: ${genres.joinToString { it.name }}",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
         Text(
             text = "Fecha de estreno: $overview",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(
             text = "Fecha de estreno: $releaseDate",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
@@ -151,11 +157,11 @@ fun MovieInfoCard(
                         Log.d("ActorId", "Id del actor: ${actor.id}")
                         Text(
                             text = actor.name,
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+                            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
                         )
                         Text(
                             text = "como ${actor.character}",
-                            style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                            style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                         )
                     }
 

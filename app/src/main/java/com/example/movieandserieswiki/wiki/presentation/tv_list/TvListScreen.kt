@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.compose.primaryContainerLightMediumContrast
 import com.example.movieandserieswiki.wiki.presentation.models.toTvUi
-import com.example.movieandserieswiki.wiki.presentation.tv_list.components.TvListItem
+import com.example.movieandserieswiki.wiki.presentation.tv_list.components.TvListInfoCard
 
 @Composable
 fun TvListScreen(
@@ -154,7 +153,7 @@ fun TvListScreen(
                             items(onTheAirTvs.itemCount) { index ->
                                 val tv = onTheAirTvs[index]
                                 tv?.let {
-                                    TvListItem(
+                                    TvListInfoCard(
                                         tvUi = it.toTvUi(),
                                         modifier = Modifier.padding(8.dp),
                                         onClick = {
@@ -175,7 +174,7 @@ fun TvListScreen(
                             items(popularTvs.itemCount) { index ->
                                 val tv = popularTvs[index]
                                 tv?.let {
-                                    TvListItem(
+                                    TvListInfoCard(
                                         tvUi = it.toTvUi(),
                                         modifier = Modifier.padding(8.dp),
                                         onClick = {
@@ -196,7 +195,7 @@ fun TvListScreen(
                             items(topRatedTvs.itemCount) { index ->
                                 val tv = topRatedTvs[index]
                                 tv?.let {
-                                    TvListItem(
+                                    TvListInfoCard(
                                         tvUi = it.toTvUi(),
                                         modifier = Modifier.padding(8.dp),
                                         onClick = {
@@ -218,7 +217,7 @@ fun TvListScreen(
                             items(searchState.size) { index ->
                                 val tv = searchState[index]
                                 tv?.let {
-                                    TvListItem(
+                                    TvListInfoCard(
                                         tvUi = it,
                                         modifier = Modifier.padding(8.dp),
                                         onClick = { onAction(TvListAction.OnTvSelected(it)) }

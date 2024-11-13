@@ -138,46 +138,46 @@ fun ActorInfoCard(actorUi: ActorUi, cast: List<ActorCastUi>, modifier: Modifier 
                         if (actor.title.isNullOrEmpty()) {
                             Text(
                                 text = "No hay información disponible",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         } else {
                             Text(
                                 text = actor.title,
-                                style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
                             )
                         }
 
                         if (actor.character.isNullOrEmpty()) {
                             Text(
                                 text = "No hay información disponible",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         } else {
                             Text(
                                 text = "como ${actor.character}",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         }
                         if (actor.releaseDate.isNullOrEmpty()) {
                             Text(
                                 text = "No hay información disponible",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         } else {
                             Text(
                                 text = "${actor.releaseDate}",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         }
                         if (actor.mediaType.isNullOrEmpty()) {
                             Text(
                                 text = "No hay información disponible",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         } else {
                             Text(
                                 text = "${actor.mediaType}",
-                                style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                                style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                             )
                         }
                     }

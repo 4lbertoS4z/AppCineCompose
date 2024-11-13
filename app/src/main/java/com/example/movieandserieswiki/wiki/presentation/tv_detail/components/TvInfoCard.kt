@@ -3,6 +3,7 @@ package com.example.movieandserieswiki.wiki.presentation.tv_detail.components
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -40,6 +41,11 @@ fun TvInfoCard(
     actorClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val contentColor = if (isSystemInDarkTheme()) {
+        Color.White
+    } else {
+        Color.Black
+    }
     Column(
         modifier = modifier
             .padding(16.dp)
@@ -68,13 +74,13 @@ fun TvInfoCard(
         )
         Text(
             text = name,
-            style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp, color = Color.White),
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp, color = contentColor),
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
             text = "Puntuación:",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 8.dp)
         )
         CircularRatingIndicator(
@@ -88,19 +94,19 @@ fun TvInfoCard(
 
         Text(
             text = "Género: ${genres.joinToString { it.name }}",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
         Text(
             text = "Descripción: $overview",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
         Text(
             text = "Fecha de estreno: $firstAirDate",
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
@@ -137,11 +143,11 @@ fun TvInfoCard(
                     Column {
                         Text(
                             text = actor.name,
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+                            style = MaterialTheme.typography.bodyMedium.copy(color = contentColor),
                         )
                         Text(
                             text = "como ${actor.character}",
-                            style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
+                            style = MaterialTheme.typography.bodySmall.copy(color = contentColor),
                         )
                     }
                 }

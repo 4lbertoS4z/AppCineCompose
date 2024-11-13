@@ -1,4 +1,4 @@
-package com.example.movieandserieswiki.wiki.presentation.search_actor_list.components
+package com.example.movieandserieswiki.wiki.presentation.movie_list.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,61 +22,33 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.movieandserieswiki.R
 import com.example.movieandserieswiki.wiki.data.common.BASE_IMG_URL
-import com.example.movieandserieswiki.wiki.presentation.models.ActorUi
+import com.example.movieandserieswiki.wiki.presentation.components.CircularRatingIndicator
+import com.example.movieandserieswiki.wiki.presentation.models.MovieUi
 
 @Composable
-fun SearchActorListItem(
-    actorUi: ActorUi, // Suponiendo que ActorUi es un modelo similar al MovieUi
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val contentColor = if (isSystemInDarkTheme()) {
-        Color.White
-    } else {
-        Color.Black
-    }
-
+fun MovieListItem(movieUi: MovieUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .clickable(onClick = onClick)
-            .padding(8.dp)
+            .padding(34.dp)
             .clip(RoundedCornerShape(10))
             .fillMaxWidth()
             .height(220.dp),
         contentAlignment = Alignment.BottomStart
     ) {
-        // Cargar la imagen del actor
+        // Utiliza AsyncImage para cargar la imagen
         AsyncImage(
-            model = "${BASE_IMG_URL}${actorUi.profilePath}",
-            contentDescription = actorUi.name,
+            model = "${BASE_IMG_URL}${movieUi.posterPath}",
+            contentDescription = movieUi.title,
             modifier = Modifier.size(220.dp),
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Crop, // Ajustar la escala de contenido
             placeholder = painterResource(id = R.drawable.sample), // Reemplaza con tu recurso de imagen
             error = painterResource(id = R.drawable.sample) // Reemplaza con tu recurso de imagen
         )
-
-        // Fondo degradado
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color.Black.copy(alpha = 0f),
-                            Color.Black.copy(alpha = 0.5f),
-                            Color.Black.copy(alpha = 0.7f)
-                        )
-                    )
-                ),
-            contentAlignment = Alignment.BottomStart
-        ) {
-            Text(
-                text = actorUi.name,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .align(Alignment.BottomStart)
-            )
-        }
     }
 }
+
+
+
+
+

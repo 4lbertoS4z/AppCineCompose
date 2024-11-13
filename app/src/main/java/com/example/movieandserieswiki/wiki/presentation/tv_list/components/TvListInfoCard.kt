@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,13 +26,7 @@ import com.example.movieandserieswiki.wiki.presentation.components.CircularRatin
 import com.example.movieandserieswiki.wiki.presentation.models.TvUi
 
 @Composable
-fun TvListItem(tvUi: TvUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    val contentColor = if (isSystemInDarkTheme()) {
-        Color.White
-    } else {
-        Color.Black
-    }
-
+fun TvListInfoCard(tvUi: TvUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .clickable(onClick = onClick)
@@ -50,31 +45,5 @@ fun TvListItem(tvUi: TvUi, onClick: () -> Unit, modifier: Modifier = Modifier) {
             placeholder = painterResource(id = R.drawable.sample),
             error = painterResource(id = R.drawable.sample)
         )
-
-        // Box con el fondo degradado
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color.Black.copy(alpha = 0f),
-                            Color.Black.copy(alpha = 0.5f),
-                            Color.Black.copy(alpha = 0.7f)
-                        )
-                    )
-                ),
-            contentAlignment = Alignment.BottomStart
-        ) {
-            // Indicador de calificación
-            CircularRatingIndicator(
-                rating = tvUi.voteAverage.formatted.toFloat(),
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(8.dp)
-                    .size(60.dp)
-            )
-        }
     }
 }

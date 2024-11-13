@@ -31,7 +31,7 @@ fun TvDto.toTv(): Tv {
             ?: "Fecha de última emisión no disponible", // Manejo de campo opcional
         numberOfEpisodes = this.numberOfEpisodes ?: 0, // Manejo de campo opcional
         numberOfSeasons = this.numberOfSeasons ?: 0, // Manejo de campo opcional
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         backdropPath = this.backdropPath,
         popularity = this.popularity ?: 0.0,
         genres = this.genres?.map { it.toGenre() } ?: emptyList(), // Manejo de lista nula

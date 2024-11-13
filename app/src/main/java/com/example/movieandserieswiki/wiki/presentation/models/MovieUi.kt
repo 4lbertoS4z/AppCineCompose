@@ -35,7 +35,8 @@ data class CastUi(
 
 data class VideoUi(
     val key: String,
-    val name: String
+    val name: String,
+    val type: String? = null
 )
 
 data class DisplayableNumber(
@@ -66,7 +67,7 @@ fun Movie.toMovieUi(): MovieUi {
         } ?: emptyList(),
         genres = genres?.map { GenreUi(it.id, it.name) }
             ?: emptyList(),  // Conversión de géneros si existen
-        videos = videos?.results?.map { VideoUi(it.key, it.name) }
+        videos = videos?.results?.map { VideoUi(it.key, it.name,it.type) }
             ?: emptyList() // Conversión de videos si existen
     )
 }

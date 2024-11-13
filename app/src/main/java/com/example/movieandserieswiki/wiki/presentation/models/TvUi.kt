@@ -38,7 +38,8 @@ data class TvCastUi(
 
 data class TvVideoUi(
     val key: String,
-    val name: String
+    val name: String,
+    val type: String? = null
 )
 
 data class TvDisplayableNumber(
@@ -65,7 +66,7 @@ fun Tv.toTvUi(): TvUi {
             ?: emptyList(),
         genres = genres?.map { TvGenreUi(it.id, it.name) }
             ?: emptyList(),
-        videos = videos?.results?.map { TvVideoUi(it.key, it.name) }
+        videos = videos?.results?.map { TvVideoUi(it.key, it.name,it.type) }
             ?: emptyList()
     )
 }

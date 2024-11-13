@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.compose.primaryContainerLightMediumContrast
-import com.example.movieandserieswiki.wiki.presentation.search_actor_list.components.SearchActorListItem
+import com.example.movieandserieswiki.wiki.presentation.search_actor_list.components.SearchActorListInfoCard
 
 @Composable
 fun SearchActorListScreen(
@@ -105,7 +105,7 @@ fun SearchActorListScreen(
                     items(searchState.size) { index ->
                         val actor = searchState[index]
                         actor?.let {
-                            SearchActorListItem(
+                            SearchActorListInfoCard(
                                 actorUi = it,
                                 modifier = Modifier.padding(8.dp),
                                 onClick = { onAction(SearchActorListAction.OnActorSelected(it)) }

@@ -1,5 +1,6 @@
 package com.example.movieandserieswiki.wiki.presentation.actor_detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.compose.primaryContainerLightMediumContrast
 import com.example.movieandserieswiki.wiki.presentation.actor_detail.components.ActorInfoCard
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,43 +40,51 @@ fun ActorDetailScreen(
         Color.Black
     }
 
-    if (state.isLoading) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
-    } else if (state.actorDetail != null) {
-        val actor = state.actorDetail
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(primaryContainerLightMediumContrast)
+    ) {
 
-        LazyColumn(
-            modifier = modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            actor.profilePath?.let {
-                item {
-                    ActorInfoCard(
-                        actorUi = actor,
-                        cast = actor.cast,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
 
-                }
+        if (state.isLoading) {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
+        } else if (state.actorDetail != null) {
+            val actor = state.actorDetail
+
+            LazyColumn(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                actor.profilePath?.let {
+                    item {
+                        ActorInfoCard(
+                            actorUi = actor,
+                            cast = actor.cast,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+
+                    }
+                }
 
 
-        }
-    } else {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Detalles del actor no disponibles",
-                style = MaterialTheme.typography.bodyMedium,
-                color = contentColor
-            )
+            }
+        } else {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Detalles del actor no disponibles",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = contentColor
+                )
+            }
         }
     }
 }
